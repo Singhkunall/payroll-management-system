@@ -1,11 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { User, Mail, Briefcase, Building, IndianRupee, Calendar } from 'lucide-react';
+import API from '../api/axios';
 
 const EmployeeProfile = () => {
-  // Local storage se user ka data nikalna
-  const user = JSON.parse(localStorage.getItem('userInfo'));
+  const [employee, setEmployee] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  if (!user) return <div className="text-white text-center mt-20">Loading...</div>;
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+        if (!userInfo) return;
+
+        const { data } = await API.get(`/employees/${userInfo._id}`);
+        setEmployee(data.employee);
+      } catch (error) {
+        console.error("Profile fetch error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProfile();
+  }, []);
+
+  if (loading) return <div className="text-white text-center mt-20">Loading...</div>;
+  if (!employee) return <div className="text-white text-center mt-20">Profile not found.</div>;
+
+  const user = employee; // baaki JSX mein 'user' hi use hoga, isliye rename kar diya
+
+  // ... yahan se neeche ka poora JSX (return wala part) waisa hi rahega
 
   return (
     <div className="p-4 md:p-8 bg-[#0a0f1a] min-h-screen text-white font-sans">
@@ -41,7 +65,7 @@ const EmployeeProfile = () => {
               <Building className="w-5 h-5 text-gray-500" />
               <div>
                 <p className="text-xs text-gray-500">Department</p>
-                <p className="text-sm font-medium">{user.department || 'Not Assigned'}</p>
+                <p className="text-sm font-medium">{user.department?.name || 'Not Assigned'}</p>
               </div>
             </div>
           </div>
@@ -60,7 +84,7 @@ const EmployeeProfile = () => {
                 <h3 className="text-lg font-semibold">Job Details</h3>
               </div>
               <p className="text-sm text-gray-400 leading-relaxed">
-                Designation: <span className="text-white font-medium">{user.designation || 'Trainee'}</span>
+                Designation: <span className="text-white font-medium">{user.designation?.name || 'Not Assigned'}</span>
               </p>
               <p className="text-sm text-gray-400 mt-2">
                 Status: <span className="text-green-400 font-medium">Active</span>
