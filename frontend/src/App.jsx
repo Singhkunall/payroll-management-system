@@ -29,6 +29,7 @@ import LeaveRequests from './pages/LeaveRequests';
 import ApplyLeave from './pages/ApplyLeave';
 import LeaveHistory from './pages/LeaveHistory';
 import LeaveBalance from './pages/LeaveBalance';
+import ProfileSettings from './pages/ProfileSettings';
 
 // --- NAYA IMPORT YAHAN HAI ---
 import MyPayslips from './pages/MyPayslips'; 
@@ -85,6 +86,7 @@ function App() {
           <Route path="/add-employee" element={<ProtectedRoute><AddEmployee /></ProtectedRoute>} />
           <Route path="/edit-employee/:id" element={<ProtectedRoute><EditEmployee /></ProtectedRoute>} />
           <Route path="/employee-profile" element={<ProtectedRoute><EmployeeProfile /></ProtectedRoute>} />
+          <Route path="/profile-settings" element={<ProtectedRoute><ProfileSettings /></ProtectedRoute>} />
 
         </Routes>
       </Layout>
