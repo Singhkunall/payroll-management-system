@@ -99,7 +99,7 @@ const EmployeeProfile = () => {
                 <h3 className="text-lg font-semibold">Financials</h3>
               </div>
               <p className="text-sm text-gray-400">
-                Base Salary: <span className="text-white font-medium">₹{user.baseSalary?.toLocaleString() || '0'}</span>
+                Base Salary: <span className="text-white font-medium">₹{user.salaryStructure?.grossSalary?.toLocaleString() || '0'}</span>
               </p>
               <p className="text-xs text-gray-500 mt-2 italic">*Monthly fixed pay before deductions.</p>
             </div>
