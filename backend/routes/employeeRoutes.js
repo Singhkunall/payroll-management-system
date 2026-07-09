@@ -85,6 +85,29 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+router.put('/:id/change-password', async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+    const employee = await Employee.findById(req.params.id);
+
+    if (!employee) {
+      return res.status(404).json({ success: false, message: "Employee not found" });
+    }
+
+    const isMatch = await employee.matchPassword(currentPassword);
+    if (!isMatch) {
+      return res.status(401).json({ success: false, message: "Current password is incorrect" });
+    }
+
+    employee.password = newPassword;
+    await employee.save();
+
+    res.json({ success: true, message: "Password updated successfully" });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 // --- 3. SABSE AAKHIR MEIN DYNAMIC PARAMETER (:id) ---
 
 // Get Single Employee - UPDATE: Added Shift Populate
