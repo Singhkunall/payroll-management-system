@@ -12,6 +12,7 @@ import departmentRoutes from './routes/departmentRoutes.js';
 import designationRoutes from './routes/designationRoutes.js'; 
 import holidayRoutes from './routes/holidayRoutes.js';
 import shiftRoutes from './routes/shiftRoutes.js';
+import updateRequestRoutes from './routes/updateRequestRoutes.js';
 
 // --- Naya Route Import (Yahan add kiya) ---
 import leaveRoutes from './routes/leaveRoutes.js'; 
@@ -49,7 +50,7 @@ app.use('/api/holidays', holidayRoutes);
 app.use('/api/departments', departmentRoutes);
 app.use('/api/designations', designationRoutes);
 app.use('/api/shifts', shiftRoutes);
-
+app.use('/api/update-requests', updateRequestRoutes);
 // --- Leave Route Register (Yahan add kiya) ---
 app.use('/api/leaves', leaveRoutes);
 
