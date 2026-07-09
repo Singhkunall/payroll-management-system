@@ -40,6 +40,7 @@ const Sidebar = () => {
       { title: 'Employees', path: '/employees', icon: <Users size={20} /> },
       { title: 'Departments', path: '/departments', icon: <Building2 size={20} /> },
       { title: 'Designations', path: '/designations', icon: <Briefcase size={20} /> },
+      { title: 'Update Requests', path: '/update-requests', icon: <ClipboardList size={20} /> },
     ]},
     { group: 'ATTENDANCE', isCollapsible: true, items: [
       { title: 'Attendance Monitor', path: '/attendance-monitor', icon: <CalendarClock size={20} /> },
